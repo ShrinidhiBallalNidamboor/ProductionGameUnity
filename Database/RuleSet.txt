@@ -1,0 +1,5 @@
+Engine,1*Battery,5*Wire,2*Piston
+Frame,1*UpperPlate,1*BottomPlate
+BikeFrame,1*Engine,1*Frame
+BikeFramePainted,1*BikeFrame,3*Paint
+Bike,1*BikeFramePainted,2*Tyre,10*Screw
