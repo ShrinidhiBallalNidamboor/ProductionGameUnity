@@ -8,8 +8,8 @@
 6. Shop Manager.
 #### B. The components in the warehouse of each of the departments are processed, assembled and sent to next detpartment.
 
-![image](https://github.com/user-attachments/assets/523786a5-5aa9-4855-8140-238d3f060831)
+![image](https://github.com/user-attachments/assets/549e90f7-4467-45a2-a6c2-57fad28039a3)
 Conversing with NPCs to get information about the game features
 
-![image](https://github.com/user-attachments/assets/467d2519-b5ba-4a84-a5f1-359234d72e2d)
+![image](https://github.com/user-attachments/assets/5c661231-2d36-448a-87e4-648ad55d0f70)
 Checking out the desk and computer to perform different operations
