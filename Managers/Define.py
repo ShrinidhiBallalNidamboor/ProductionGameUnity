@@ -81,10 +81,10 @@ def command(i,next,list,order,commandinput):
         val=[]
         for j in list:
             val.append([j[0],warehouse(i,j[0])[0]])
-        time.sleep(10)
-        sendgoods('Ordered Goods delivered', next, val)
         for j in list:
             storewarehouse(i,j[0],0)
+        time.sleep(10)
+        sendgoods('Ordered Goods delivered', next, val)
     elif commandinput==3:
         val=[]
         for j in list:
