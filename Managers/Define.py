@@ -76,7 +76,7 @@ def sendgoods(msg, to, components):
 # 3. Assemble or paint
 def command(i,next,list,order,commandinput):
     if commandinput==1:
-        notify(order+'-'+str(i), [4])
+        notify(order+'-'+str(i), [5])
     elif commandinput==2:
         val=[]
         for j in list:

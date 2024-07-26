@@ -8,7 +8,7 @@ while True:
     print('Send items: ')
     commandinput=input('Enter the command(Y/N): ')
     if commandinput=='Y':
-        data=readfile(filepath[4])
+        data=readfile(filepath[5])
         data=data.split('\n')
         if data==['']:
             continue
