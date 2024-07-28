@@ -16,10 +16,12 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private GameObject _orderUI;
     [SerializeField] private GameObject _inventoryUI;
     [SerializeField] private GameObject _computerUI;
+    [SerializeField] private GameObject _ruleUI;
     [SerializeField] private GameObject _menu;
     [SerializeField] private GameObject _order;
     [SerializeField] private GameObject _inventorylist;
     [SerializeField] private GameObject _computer;
+    [SerializeField] private GameObject _rule;
     [SerializeField] private GameObject _yellow;
     [SerializeField] private GameObject _green;
     [SerializeField] private GameObject _incrate;
@@ -28,7 +30,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private float _dialogSpeed;
     [SerializeField] private AudioClip _dialogSFX;
 
-    //Dialog information
+    //Dialog information for the given update npc character
     [SerializeField] private Dialog _dialog;
     private Dialog _currentDialog;
     private int _currentDialogLine;
@@ -36,11 +38,16 @@ public class DialogManager : MonoBehaviour
     private Tween _dialogTextTween;
     private Action _onCurrentDialogFinish;
 
-    //Menu control
+    //Menu control information
+    //Represents which state the player is currently in
     private int _state = 0;
+    //The amount by which the content rows are scrolled up or down when choosing from the option in the option box
     private float scroll = 1.035f;
+    //Number of items in the given option box
     private int childCount = 0;
+    //The position of the highlighted option in the option box
     private int index = 0;
+    //Pointer to the item in the option box
     private int pointer = 0;
 
     public event Action OnDialogStart;
@@ -49,15 +56,22 @@ public class DialogManager : MonoBehaviour
     public static DialogManager SharedInstance;
     private bool IsDialogLineBeingWritten => _dialogTextTween != null && _dialogTextTween.IsPlaying();
 
-    //File control
+    //File control information used as per the role of the player
     private string filemessenger = "../Database/Messenger/Manager1.txt";
     private int messengerlength = 0;
     private string filewarehouse = "../Database/Warehouse/Warehouse1.txt";
 
-    //Manager specific info
+    //Manager specific information
+    //The number of products that needs to be produced by this department
     private int numberofproducts = 2;
+    //The type of user  
+    // user 1 - Machine Assembly Manager
+    // user 2 - Engine Assembly Manager
+    // user 3 - Painted Assembly Manager
+    // user 4 - Vehicle Assembly Manager 
     private int user = 1;
 
+    //Initialises the variable SharedInstance so that it can be used by other codes
     private void Awake() {
         if (SharedInstance == null)
         {
@@ -71,10 +85,13 @@ public class DialogManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    //Gets the text in the dialog box
     private void Start() {
         _dialogText = _dialogBox.GetComponentInChildren<Text>();
     }
 
+    //This function is executed every frame, and it checks the given file and if the new line 
+    //is a target then the dialog box text is updated, if not the crate incoming animation is shown
     private async void Update() {
         if (!File.Exists(filemessenger))
         {
@@ -92,15 +109,17 @@ public class DialogManager : MonoBehaviour
                 {
                     length += 1;
                     lastline = line;
-                }
-                if (length != messengerlength)
-                {
-                    messengerlength = length;
                     if (lastline.Substring(0, 6) == "Target")
                     {
                         _dialog.Lines[0] = lastline;
                     }
-                    else{
+                }
+                if (length != messengerlength)
+                {
+                    messengerlength = length;
+                    
+                    if (lastline.Substring(0, 6) != "Target")
+                    {
                         await MoveCrate(_incrate, 6, 1);
                     }
                 }
@@ -113,6 +132,15 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    //Function to handle the game functions when the keys are pressed
+    // State 1 - Dialog box is activated
+    // State 2 - Displays Menu option box
+    // State 3 - Displays Inventory option box
+    // State 4 - Displays order option box
+    // State 5 - Transition state where the order count is updated
+    // State 6 - Menu option box in the computer
+    // State 7 - Assemble operation
+    // State 8 - Send out operation
     public async void HandleUpdate()
     {
         if (Input.GetButtonDown("Submit"))
@@ -139,12 +167,17 @@ public class DialogManager : MonoBehaviour
                 EndMenu(_state);
                 if (pointer == 0)
                 {
-                    InventoryUpdate();
+                    InventoryRuleUpdate(3, 0);
                     ShowMenu(3);
                 }
                 else if (pointer == 1)
                 {
                     ShowMenu(4);
+                }
+                else
+                {
+                    InventoryRuleUpdate(8, 1);
+                    ShowMenu(8);
                 }
             }
             else if (_state == 4)
@@ -210,7 +243,7 @@ public class DialogManager : MonoBehaviour
         }
         else if (Input.GetButtonDown("Up"))
         {
-            if (_state == 2 || _state == 3 || _state == 4 || _state == 6)
+            if (_state == 2 || _state == 3 || _state == 4 || _state == 6 || _state == 8)
             {
                 ToggleColor(Match(_state), pointer, "black");
                 Scrolling(_state, -1, 0, 0);
@@ -223,7 +256,7 @@ public class DialogManager : MonoBehaviour
         }
         else if (Input.GetButtonDown("Down"))
         {
-            if (_state == 2 || _state == 3 || _state == 4 || _state == 6)
+            if (_state == 2 || _state == 3 || _state == 4 || _state == 6 || _state == 8)
             {
                 ToggleColor(Match(_state), pointer, "black");
                 Scrolling(_state, 1, 3, childCount-1);
@@ -236,6 +269,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    //Execute sthe python code to place the order
     public void ReceiveOrder()
     {
         string[] value = new string[childCount-1+numberofproducts];
@@ -253,6 +287,7 @@ public class DialogManager : MonoBehaviour
         RunPython("python3", "../Managers/Manager.py", user, order, 1);
     }
 
+    //Runs the python code that is provided in the scriptpath and also passes three arguements
     public void RunPython(string pythonExe, string scriptPath, int arg1, string arg2, int arg3)
     {
         ProcessStartInfo start = new ProcessStartInfo();
@@ -265,9 +300,9 @@ public class DialogManager : MonoBehaviour
         Process process = Process.Start(start);
     }
 
-    public void InventoryUpdate()
+    //Updates the inventory or the rules information by accessing the database file for the same
+    public void InventoryRuleUpdate(int type, int index)
     {
-        _inventoryUI.SetActive(true);
         if (!File.Exists(filewarehouse))
         {
             Console.WriteLine("The file does not exist.");
@@ -281,9 +316,9 @@ public class DialogManager : MonoBehaviour
                 int pointer = 0;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string count = line.Split('-')[1].Split(',')[0];
+                    string count = line.Split('-')[1].Split(',')[index];
                     Console.WriteLine(count);
-                    CountUpdate(Match(3), pointer, count);
+                    CountUpdate(Match(type), pointer, count);
                     pointer += 1;
                 }
             }
@@ -295,6 +330,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    //Toggles the color of the bulb in the game
     public async Task ToggleBlub()
     {
         for(int i=0;i<4;i=i+1)
@@ -308,6 +344,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    //Moves the creates either as coming in or out
     public async Task MoveCrate(GameObject component, int steps, float amount)
     {
         component.SetActive(true);
@@ -327,6 +364,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    //Scrolling the options in the option box
     public void Scrolling(int type, int indexing, int top, int end)
     {
         if (index == top)
@@ -346,6 +384,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    //Changes the count and increases or decreases the count of the product
     public void CountChange(GameObject component, int pointer, int indexing)
     {
         Text text = component.transform.GetChild(pointer).GetChild(1).transform.GetComponent<Text>();
@@ -357,12 +396,14 @@ public class DialogManager : MonoBehaviour
         text.text = $"{number}";
     }
     
+    //Change the count of item based on the database file information to display the inventory
     public void CountUpdate(GameObject component, int pointer, string count)
     {
         Text text = component.transform.GetChild(pointer).GetChild(1).transform.GetComponent<Text>();
         text.text = count;
     }
 
+    //Toggle the color of the option in the option box
     public void ToggleColor(GameObject component, int pointer, string color)
     {
         Text text1 = component.transform.GetChild(pointer).GetChild(0).transform.GetComponent<Text>();
@@ -384,6 +425,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    //Returns the type of option box in the item list
     public GameObject Match(int type)
     {
         GameObject component;
@@ -399,13 +441,18 @@ public class DialogManager : MonoBehaviour
         {
             component=_order;
         }
-        else
+        else if (type == 6)
         {
             component=_computer;
+        }
+        else
+        {
+            component=_rule;
         }
         return component;
     }
 
+    //Returns the type of option box
     public GameObject MatchBackground(int type)
     {
         GameObject component;
@@ -421,13 +468,18 @@ public class DialogManager : MonoBehaviour
         {
             component=_orderUI;
         }
-        else
+        else if (type == 6)
         {
             component=_computerUI;
+        }
+        else
+        {
+            component=_ruleUI;
         }
         return component;
     }
 
+    //Displays the menu or other option box
     public void ShowMenu(int type, Action onNpcDialogFinish = null)
     {
         _state = type;
@@ -444,6 +496,7 @@ public class DialogManager : MonoBehaviour
         OnDialogStart?.Invoke();
     }
 
+    //Removes the menu or other option box from the screen
     public void EndMenu(int type)
     {
         GameObject component = Match(type);
@@ -456,7 +509,8 @@ public class DialogManager : MonoBehaviour
         _onCurrentDialogFinish?.Invoke();
         _state = 0;
     }
-    
+
+    //Displays the dialog box
     public void StartDialog(Action onNpcDialogFinish = null)
     {
         _state = 1;
@@ -467,6 +521,7 @@ public class DialogManager : MonoBehaviour
         OnDialogStart?.Invoke();
     }
 
+    //Removes the dialog box from the screen
     public void EndDialog()
     {
         ToggleDialogBox(false);
@@ -475,6 +530,7 @@ public class DialogManager : MonoBehaviour
         _state = 0;
     }
 
+    //Controls the display of option box
     private void ToggleMenu(bool active, int type)
     {
         _board.SetActive(active);
@@ -482,11 +538,13 @@ public class DialogManager : MonoBehaviour
         component.SetActive(active);
     }
     
+    //Controls the display of dialog box
     private void ToggleDialogBox(bool active)
     {
         _dialogBox.SetActive(active);
     }
 
+    //Displays te dialog by animating it character by character
     private void ShowCurrentDialogLine()
     {
         StartCoroutine(AnimateDialogLine(_currentDialog.Lines[_currentDialogLine]));

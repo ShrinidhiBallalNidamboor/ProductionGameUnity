@@ -16,10 +16,12 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private GameObject _orderUI;
     [SerializeField] private GameObject _inventoryUI;
     [SerializeField] private GameObject _computerUI;
+    [SerializeField] private GameObject _ruleUI;
     [SerializeField] private GameObject _menu;
     [SerializeField] private GameObject _order;
     [SerializeField] private GameObject _inventorylist;
     [SerializeField] private GameObject _computer;
+    [SerializeField] private GameObject _rule;
     [SerializeField] private GameObject _yellow;
     [SerializeField] private GameObject _green;
     [SerializeField] private GameObject _incrate;
@@ -92,15 +94,17 @@ public class DialogManager : MonoBehaviour
                 {
                     length += 1;
                     lastline = line;
-                }
-                if (length != messengerlength)
-                {
-                    messengerlength = length;
                     if (lastline.Substring(0, 6) == "Target")
                     {
                         _dialog.Lines[0] = lastline;
                     }
-                    else{
+                }
+                if (length != messengerlength)
+                {
+                    messengerlength = length;
+                    
+                    if (lastline.Substring(0, 6) != "Target")
+                    {
                         await MoveCrate(_incrate, 6, 1);
                     }
                 }
@@ -139,12 +143,17 @@ public class DialogManager : MonoBehaviour
                 EndMenu(_state);
                 if (pointer == 0)
                 {
-                    InventoryUpdate();
+                    InventoryRuleUpdate(3, 0);
                     ShowMenu(3);
                 }
                 else if (pointer == 1)
                 {
                     ShowMenu(4);
+                }
+                else
+                {
+                    InventoryRuleUpdate(8, 1);
+                    ShowMenu(8);
                 }
             }
             else if (_state == 4)
@@ -210,7 +219,7 @@ public class DialogManager : MonoBehaviour
         }
         else if (Input.GetButtonDown("Up"))
         {
-            if (_state == 2 || _state == 3 || _state == 4 || _state == 6)
+            if (_state == 2 || _state == 3 || _state == 4 || _state == 6 || _state == 8)
             {
                 ToggleColor(Match(_state), pointer, "black");
                 Scrolling(_state, -1, 0, 0);
@@ -223,7 +232,7 @@ public class DialogManager : MonoBehaviour
         }
         else if (Input.GetButtonDown("Down"))
         {
-            if (_state == 2 || _state == 3 || _state == 4 || _state == 6)
+            if (_state == 2 || _state == 3 || _state == 4 || _state == 6 || _state == 8)
             {
                 ToggleColor(Match(_state), pointer, "black");
                 Scrolling(_state, 1, 3, childCount-1);
@@ -265,9 +274,8 @@ public class DialogManager : MonoBehaviour
         Process process = Process.Start(start);
     }
 
-    public void InventoryUpdate()
+    public void InventoryRuleUpdate(int type, int index)
     {
-        _inventoryUI.SetActive(true);
         if (!File.Exists(filewarehouse))
         {
             Console.WriteLine("The file does not exist.");
@@ -281,9 +289,9 @@ public class DialogManager : MonoBehaviour
                 int pointer = 0;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string count = line.Split('-')[1].Split(',')[0];
+                    string count = line.Split('-')[1].Split(',')[index];
                     Console.WriteLine(count);
-                    CountUpdate(Match(3), pointer, count);
+                    CountUpdate(Match(type), pointer, count);
                     pointer += 1;
                 }
             }
@@ -399,9 +407,13 @@ public class DialogManager : MonoBehaviour
         {
             component=_order;
         }
-        else
+        else if (type == 6)
         {
             component=_computer;
+        }
+        else
+        {
+            component=_rule;
         }
         return component;
     }
@@ -421,9 +433,13 @@ public class DialogManager : MonoBehaviour
         {
             component=_orderUI;
         }
-        else
+        else if (type == 6)
         {
             component=_computerUI;
+        }
+        else
+        {
+            component=_ruleUI;
         }
         return component;
     }

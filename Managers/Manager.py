@@ -1,4 +1,7 @@
-from Define import command
+from Define import commandManager
+from Define import storeManager
+from Define import createmessenger
+from Define import setTarget
 import sys
 
 # 1. Machine Manager
@@ -12,12 +15,20 @@ if __name__ == "__main__":
     order = sys.argv[2]
     commandinput = int(sys.argv[3])
     if user==1:
-        command(0,1,[['Engine',['Battery','Wire','Piston']],['Frame',['UpperPlate','BottomPlate']]],order,commandinput)
+        commandManager(0,1,[['Engine',['Battery','Wire','Piston']],['Frame',['UpperPlate','BottomPlate']]],order,commandinput)
     elif user==2:
-        command(1,2,[['BikeFrame',['Engine','Frame']]],order,commandinput)
+        commandManager(1,2,[['BikeFrame',['Engine','Frame']]],order,commandinput)
     elif user==3:
-        command(2,3,[['BikeFramePainted',['Paint','BikeFrame']]],order,commandinput)
+        commandManager(2,3,[['BikeFramePainted',['Paint','BikeFrame']]],order,commandinput)
+    elif user==4:
+        commandManager(3,4,[['Bike',['Tyre','Screw','BikeFramePainted']]],order,commandinput)
+    elif user==5:
+        storeManager(order)
+    elif user==6:
+        createmessenger()
     else:
-        command(3,4,[['Bike',['Tyre','Screw','BikeFramePainted']]],order,commandinput)
+        setTarget(order)
+
+
 
 

@@ -16,6 +16,10 @@ filepath.append('../Database/Warehouse/Warehouse3.txt')
 filepath.append('../Database/Warehouse/Warehouse4.txt')
 filepath.append('../Database/Warehouse/Warehouse5.txt')
 
+departmentsendingDelay=10
+storesendingDelay=10
+assemblyDelay=10
+
 def warehouse(i, component):
     print(i+8)
     print(filepath[i+8])
@@ -74,7 +78,7 @@ def sendgoods(msg, to, components):
 # 1. Order Products from shop
 # 2. Send finished products
 # 3. Assemble or paint
-def command(i,next,list,order,commandinput):
+def commandManager(i,next,list,order,commandinput):
     if commandinput==1:
         notify(order+'-'+str(i), [5])
     elif commandinput==2:
@@ -83,7 +87,7 @@ def command(i,next,list,order,commandinput):
             val.append([j[0],warehouse(i,j[0])[0]])
         for j in list:
             storewarehouse(i,j[0],0)
-        time.sleep(10)
+        time.sleep(departmentsendingDelay)
         sendgoods('Ordered Goods delivered', next, val)
     elif commandinput==3:
         val=[]
@@ -95,5 +99,20 @@ def command(i,next,list,order,commandinput):
             for k in j[1]:
                 storewarehouse(i,k,warehouse(i,k)[0]-minimum*warehouse(i,k)[1])
             val.append([j[0],warehouse(i,j[0])[0]+minimum])
+        time.sleep(assemblyDelay)
         for j in val:
             storewarehouse(i,j[0],j[1])
+
+def storeManager(data):
+    a,b=data.split('-')
+    array=a.split(',')
+    components=[]
+    length=len(array)
+    result=readfile(filepath[int(b)+8]).split('\n')
+    for i in range(length):
+        components.append([result[i].split('-')[0], int(array[i])])
+    time.sleep(storesendingDelay)
+    sendgoods('Orders Delivered', int(b), components)
+
+def setTarget(target):
+    notify('Target for the day is '+target, [0, 1, 2, 3, 5])
