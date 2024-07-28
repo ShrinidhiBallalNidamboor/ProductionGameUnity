@@ -14,6 +14,12 @@ Conversing with NPCs to get information about the game features
 ![image](https://github.com/user-attachments/assets/5c661231-2d36-448a-87e4-648ad55d0f70)
 Checking out the desk and computer to perform different operations
 
+#### D. How to use?
+1. Enter to converse with the NPCs or computer.
+2. Up and down, and left and right arrows to move.
+3. Esc to come out of the option box or dialog box.
+4. To understand the code check out the comments in the MachineAssembly folder.
+   The code for rest of the departments are only sligntly different. 
 #### C. How to play?
 1. Open all the Application .exe files of each department.
 2. Change the demand in the Demand.txt file to the one you require.
@@ -22,6 +28,7 @@ Checking out the desk and computer to perform different operations
 5. Other departments can even order from the store the components necessary based on the rule.
 6. The store is responsible for sending out the ordered products.
 7. Finally the production department is able to view the total bike produced.
+8. Players can view the rules by pressing enter in the desk.
 #### D. How to update or change?
 1. The rules used for this the assembly are as follows:
 Engine           - 1xBattery + 5xWire + 2xPiston (Produced in machine assembly)
