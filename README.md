@@ -6,21 +6,25 @@
 4. Painting Shop Manager - Person responsible for painting the bikeframes, and sending it to the vehicle assembly department.
 5. Vehicle Assembly Manager - Person responsible for producing bike, and sending it to the production warehouse.
 6. Shop Manager -  Person responsible for sending out the requested orders.
+   
 #### B. The components in the warehouse of each of the departments are processed, assembled and sent to next detpartment.
 
 ![image](https://github.com/user-attachments/assets/549e90f7-4467-45a2-a6c2-57fad28039a3)
+
 Conversing with NPCs to get information about the game features
 
 ![image](https://github.com/user-attachments/assets/5c661231-2d36-448a-87e4-648ad55d0f70)
+
 Checking out the desk and computer to perform different operations
 
-#### D. How to use?
+#### C. How to use?
 1. Enter to converse with the NPCs or computer.
 2. Up and down, and left and right arrows to move.
 3. Esc to come out of the option box or dialog box.
 4. To understand the code check out the comments in the MachineAssembly folder.
-   The code for rest of the departments are only sligntly different. 
-#### C. How to play?
+   The code for rest of the departments are only sligntly different.
+
+#### D. How to play?
 1. Open all the Application .exe files of each department.
 2. Change the demand in the Demand.txt file to the one you require.
 3. Start with the production department and set the target.
@@ -29,7 +33,8 @@ Checking out the desk and computer to perform different operations
 6. The store is responsible for sending out the ordered products.
 7. Finally the production department is able to view the total bike produced.
 8. Players can view the rules by pressing enter in the desk.
-#### D. How to update or change?
+   
+#### E. How to update or change?
 1. The rules used for this the assembly are as follows:
 Engine           - 1xBattery + 5xWire + 2xPiston (Produced in machine assembly)
 Frame            - 1xUpperPlate + 1xBottomPlate (Produced in machine assembly)
