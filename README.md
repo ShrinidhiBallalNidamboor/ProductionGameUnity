@@ -34,9 +34,9 @@ Bike             - 1xBikeFramePainted + 2xTyre + 10xScrew (Produced in vehicle a
    there are 0 item in warehouse and 1 of them is used to produce one product. If the second number is 0
    then it means that is the final product to be produced in the department.
 4. The number assignment for warehouse is as follows:
-   Machine Assembly department - Warehouse1.txt
-   Engine Assembly department - Warehouse2.txt
-   Painted Assembly department - Warehouse3.txt
-   Vehicle Assembly department - Warehouse4.txt
-   Production department - Warehouse5.txt
-5. The next step is change the inventoryUI and orderUI gameobjects after opening each department games in unity and changing it to the new rule you want to change to.
+   A. Machine Assembly department - Warehouse1.txt
+   B. Engine Assembly department - Warehouse2.txT
+   C. Painted Assembly department - Warehouse3.txt
+   D. Vehicle Assembly department - Warehouse4.txt
+   E. Production department - Warehouse5.txt
+6. The next step is change the inventoryUI and orderUI gameobjects after opening each department games in unity and changing it to the new rule you want to change to.
