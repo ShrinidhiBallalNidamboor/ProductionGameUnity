@@ -17,7 +17,7 @@ Conversing with NPCs to get information about the game features
 
 Checking out the desk and computer to perform different operations
 
-#### C. How to install?
+#### C. What to install?
 1. Install python 3.5 or above to run the games.
 2. Install Unity hub and necesary version of unity (as suggested by unity hub) to view the code.
 
