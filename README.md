@@ -49,7 +49,7 @@ Checking out the desk and computer to perform different operations
 2. The next step is to change the warehouse files labelled from 1 to 5. For example - (item-0,1) means
    there are 0 item in warehouse and 1 of them is used to produce one product. If the second number is 0
    then it means that is the final product to be produced in the department.
-3. The number assignment for warehouse is as follows: < br / >
+3. The number assignment for warehouse is as follows:<br / >
    a. Machine Assembly department - Warehouse1.txt < br / >
    b. Engine Assembly department - Warehouse2.txT < br / >
    c. Painted Assembly department - Warehouse3.txt < br / >
