@@ -39,7 +39,7 @@ Checking out the desk and computer to perform different operations
 8. Players can view the rules by pressing enter in the desk.
    
 #### F. How to update or change?
-1. Assembly rukes are as follows:
+1. Assembly rukes are as follows:\
    a. Engine           - 1xBattery + 5xWire + 2xPiston (Produced in machine assembly)\
    b. Frame            - 1xUpperPlate + 1xBottomPlate (Produced in machine assembly)\
    c. BikeFrame        - 1xEngine + 1xFrame (Produced in engine assembly)\
