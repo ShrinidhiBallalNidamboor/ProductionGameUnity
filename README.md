@@ -17,14 +17,18 @@ Conversing with NPCs to get information about the game features
 
 Checking out the desk and computer to perform different operations
 
-#### C. How to use?
+#### C. How to install?
+1. Install python 3.5 or above to run the games.
+2. Install Unity hub and necesary version of unity (as suggested by unity hub) to view the code.
+
+#### D. How to use?
 1. Enter to converse with the NPCs or computer.
 2. Up and down, and left and right arrows to move.
 3. Esc to come out of the option box or dialog box.
 4. To understand the code check out the comments in the MachineAssembly folder.
    The code for rest of the departments are only sligntly different.
 
-#### D. How to play?
+#### E. How to play?
 1. Open all the Application .exe files of each department.
 2. Change the demand in the Demand.txt file to the one you require.
 3. Start with the production department and set the target.
@@ -34,7 +38,7 @@ Checking out the desk and computer to perform different operations
 7. Finally the production department is able to view the total bike produced.
 8. Players can view the rules by pressing enter in the desk.
    
-#### E. How to update or change?
+#### F. How to update or change?
 1. The rules used for this the assembly are as follows:
 Engine           - 1xBattery + 5xWire + 2xPiston (Produced in machine assembly)
 Frame            - 1xUpperPlate + 1xBottomPlate (Produced in machine assembly)
