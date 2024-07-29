@@ -40,11 +40,11 @@ Checking out the desk and computer to perform different operations
    
 #### F. How to update or change?
 1. The rules used for this the assembly are as follows:
-Engine           - 1xBattery + 5xWire + 2xPiston (Produced in machine assembly)
-Frame            - 1xUpperPlate + 1xBottomPlate (Produced in machine assembly)
-BikeFrame        - 1xEngine + 1xFrame (Produced in engine assembly)
-BikeFramePainted - 1xBikeFrame + 3xPaint (Produced in painted assembly)
-Bike             - 1xBikeFramePainted + 2xTyre + 10xScrew (Produced in vehicle assembly)
+# Engine           - 1xBattery + 5xWire + 2xPiston (Produced in machine assembly)
+# Frame            - 1xUpperPlate + 1xBottomPlate (Produced in machine assembly)
+# BikeFrame        - 1xEngine + 1xFrame (Produced in engine assembly)
+# BikeFramePainted - 1xBikeFrame + 3xPaint (Produced in painted assembly)
+# Bike             - 1xBikeFramePainted + 2xTyre + 10xScrew (Produced in vehicle assembly)
 2. This rule can be changed by first changing the python code Manager.py, that states the above rule.
 3. The next step is to change the warehouse files labelled from 1 to 5. For example - (item-0,1) means
    there are 0 item in warehouse and 1 of them is used to produce one product. If the second number is 0
