@@ -56,3 +56,6 @@ Checking out the desk and computer to perform different operations
    d. Vehicle Assembly department - Warehouse4.txt < br / >
    e. Production department - Warehouse5.txt < br / >
 4. The next step is change the inventoryUI and orderUI gameobjects after opening each department games in unity and changing it to the new rule you want to change to.
+a\
+b\
+c
