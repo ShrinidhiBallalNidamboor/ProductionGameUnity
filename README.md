@@ -49,10 +49,10 @@ Checking out the desk and computer to perform different operations
 2. The next step is to change the warehouse files labelled from 1 to 5. For example - (item-0,1) means
    there are 0 item in warehouse and 1 of them is used to produce one product. If the second number is 0
    then it means that is the final product to be produced in the department.
-3. The number assignment for warehouse is as follows:
-3. a. Machine Assembly department - Warehouse1.txt
-3. b. Engine Assembly department - Warehouse2.txT
-3. c. Painted Assembly department - Warehouse3.txt
-3. d. Vehicle Assembly department - Warehouse4.txt
-3. e. Production department - Warehouse5.txt
+3. The number assignment for warehouse is as follows: < br / >
+   a. Machine Assembly department - Warehouse1.txt < br / >
+   b. Engine Assembly department - Warehouse2.txT < br / >
+   c. Painted Assembly department - Warehouse3.txt < br / >
+   d. Vehicle Assembly department - Warehouse4.txt < br / >
+   e. Production department - Warehouse5.txt < br / >
 4. The next step is change the inventoryUI and orderUI gameobjects after opening each department games in unity and changing it to the new rule you want to change to.
