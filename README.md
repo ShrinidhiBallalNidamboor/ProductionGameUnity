@@ -55,4 +55,10 @@ Checking out the desk and computer to perform different operations
    c. Painted Assembly department - Warehouse3.txt\
    d. Vehicle Assembly department - Warehouse4.txt\
    e. Production department - Warehouse5.txt
-6. The next step is change the inventoryUI and orderUI gameobjects after opening each department games in unity and changing it to the new rule you want to change to.
+6. The number assignment for manager messenger is as follows:\
+   a. Machine Assembly department - Manager1.txt\
+   b. Engine Assembly department - Manager2.txt\
+   c. Painted Assembly department - Manager3.txt\
+   d. Vehicle Assembly department - Manager4.txt\
+   e. Production department - Warehouse5.txt
+7. The next step is change the inventoryUI and orderUI gameobjects after opening each department games in unity and changing it to the new rule you want to change to.
