@@ -61,5 +61,5 @@ Checking out the desk and computer to perform different operations
    c. Painted Assembly department - Manager3.txt\
    d. Vehicle Assembly department - Manager4.txt\
    e. Production department - Manager5.txt\
-   f. Store Manager department - Manager6.txt\
+   f. Store Manager department - Manager6.txt
 8. The next step is change the inventoryUI and orderUI gameobjects after opening each department games in unity and changing it to the new rule you want to change to.
