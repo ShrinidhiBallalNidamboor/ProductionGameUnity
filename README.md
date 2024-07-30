@@ -5,7 +5,7 @@
 3. Engine Assembly Manager - Person responsible for producing the bikeframe, and sending it to Painting assembly department.
 4. Painting Shop Manager - Person responsible for painting the bikeframes, and sending it to the vehicle assembly department.
 5. Vehicle Assembly Manager - Person responsible for producing bike, and sending it to the production warehouse.
-6. Shop Manager -  Person responsible for sending out the requested orders.
+6. Store Manager -  Person responsible for sending out the requested orders.
    
 #### B. The components in the warehouse of each of the departments are processed, assembled and sent to next detpartment.
 
@@ -60,5 +60,6 @@ Checking out the desk and computer to perform different operations
    b. Engine Assembly department - Manager2.txt\
    c. Painted Assembly department - Manager3.txt\
    d. Vehicle Assembly department - Manager4.txt\
-   e. Production department - Warehouse5.txt
-7. The next step is change the inventoryUI and orderUI gameobjects after opening each department games in unity and changing it to the new rule you want to change to.
+   e. Production department - Manager5.txt\
+   f. Store Manager department - Manager6.txt\
+8. The next step is change the inventoryUI and orderUI gameobjects after opening each department games in unity and changing it to the new rule you want to change to.
